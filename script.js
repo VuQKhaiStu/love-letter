@@ -1,14 +1,12 @@
 const PASSWORD = "486927";
 let enteredPassword = "";
 let currentPageIndex = 0;
-let typingTimer = null;
+let hasReadOnce = false;
 let titleTypingTimer = null;
 let textTypingTimer = null;
-let envelopeOpened = false;
-let pageChanging = false;
+let isChangingPage = false;
 let typingSession = 0;
 let isTyping = false;
-let hasReadOnce = false;
 
 /* ================================= */
 /* 📖 NỘI DUNG CÁC TRANG THƯ */
@@ -114,30 +112,31 @@ function showPage() {
     clearTimeout(titleTypingTimer);
     clearTimeout(textTypingTimer);
 
+    typingSession++;
+    const session = typingSession;
+
+    isTyping = !hasReadOnce;
+
     document.getElementById("currentPage").textContent = currentPageIndex + 1;
     document.getElementById("totalPages").textContent = pages.length;
     document.getElementById("pageTitle").textContent = "";
     document.getElementById("typedText").textContent = "";
-
-    if (hasReadOnce) {
-        document.getElementById("pageTitle").textContent = page.title;
-        document.getElementById("typedText").textContent = page.text;
-    } else {
-        typeTitle(page.title, 0);
-
-        setTimeout(() => {
-            typeText(page.text, 0);
-        }, page.title.length * 45 + 300);
-    }
 
     document.getElementById("prevButton").disabled = currentPageIndex === 0;
 
     const isLastPage = currentPageIndex === pages.length - 1;
 
     document.getElementById("pageHint").textContent =
-        isLastPage ?
-        "Đọc xong rồi hãy bấm nhé ❤️" :
-        "Bấm → để đọc tiếp";
+        isLastPage ? "Đọc xong rồi hãy bấm nhé ❤️" : "Bấm → để đọc tiếp";
+
+    if (hasReadOnce) {
+        document.getElementById("pageTitle").textContent = page.title;
+        document.getElementById("typedText").textContent = page.text;
+        isTyping = false;
+        return;
+    }
+
+    typeTitle(page.title, 0, session);
 }
 
 /* ================================= */
@@ -156,7 +155,7 @@ function typeTitle(text, index, session) {
 
     titleTypingTimer = setTimeout(() => {
         typeTitle(text, index + 1, session);
-    }, 40);
+    }, 45);
 }
 
 function typeText(text, index, session) {
@@ -171,7 +170,7 @@ function typeText(text, index, session) {
 
     textTypingTimer = setTimeout(() => {
         typeText(text, index + 1, session);
-    }, 30);
+    }, 35);
 }
 
 /* ================================= */
@@ -181,22 +180,24 @@ function typeText(text, index, session) {
 function nextPage() {
     if (isChangingPage) return;
 
+    if (!hasReadOnce && isTyping) return;
+
     isChangingPage = true;
 
     clearTimeout(titleTypingTimer);
     clearTimeout(textTypingTimer);
 
-    setTimeout(() => {
-        if (currentPageIndex < pages.length - 1) {
-            currentPageIndex++;
-            showPage();
-        } else {
-            hasReadOnce = true;
-            closeLetter();
-        }
+    if (currentPageIndex < pages.length - 1) {
+        currentPageIndex++;
+        showPage();
+    } else {
+        hasReadOnce = true;
+        closeLetter();
+    }
 
+    setTimeout(() => {
         isChangingPage = false;
-    }, hasReadOnce ? 0 : 150);
+    }, 150);
 }
 
 function previousPage() {
@@ -208,11 +209,12 @@ function previousPage() {
     clearTimeout(titleTypingTimer);
     clearTimeout(textTypingTimer);
 
+    currentPageIndex--;
+    showPage();
+
     setTimeout(() => {
-        currentPageIndex--;
-        showPage();
         isChangingPage = false;
-    }, hasReadOnce ? 0 : 150);
+    }, 150);
 }
 /* ================================= */
 /* 💌 ĐÓNG LÁ THƯ */
