@@ -15,36 +15,13 @@ let hasReadOnce = false;
 /* ================================= */
 
 const pages = [{
-            title: ,
-            text:
+    title: "Gửi cậu ❤️",
+    text: `Hi cậu, lần đầu tớ làm cái này có lẽ sẽ không được mượt cho lắm nhưng mà tớ vẫn muốn gửi gắm tình cảm này của mình vào nó để chuyển đến cậu hihi.
 
-                Không biết phải bắt đầu từ đâu,
-            nên thôi thì cứ để những dòng chữ này
-            nói thay anh nhé.
-            `
-    },
-    
-    
-    
-    
-    {
-        title: "Điều cuối cùng",
-        text: `
-            Nếu em đang đọc đến đây...
+Nếu cậu thích những kiểu như này thì sau này tớ sẽ làm nhiều thêm. Hì hì.
 
-            Thì anh chỉ muốn nói rằng:
-
-                Anh yêu em.
-
-                Không phải vì em hoàn hảo.
-
-                Mà bởi vì với anh,
-            em là một người rất đặc biệt.
-
-            ❤️
-            `
-    }
-];
+Tớ yêu cậu ❤️`
+}];
 
 /* ================================= */
 /* 🔐 NHẬP & KIỂM TRA MẬT KHẨU */
