@@ -1,12 +1,18 @@
 const PASSWORD = "486927";
+
 let enteredPassword = "";
 let currentPageIndex = 0;
 let hasReadOnce = false;
+
 let titleTypingTimer = null;
 let textTypingTimer = null;
+
 let isChangingPage = false;
 let typingSession = 0;
 let isTyping = false;
+
+let envelopeOpened = false;
+let floatingHeartTimer = null;
 
 /* ================================= */
 /* 📖 NỘI DUNG CÁC TRANG THƯ */
@@ -22,11 +28,12 @@ Tớ yêu cậu ❤️`
 }];
 
 /* ================================= */
-/* 🔐 NHẬP & KIỂM TRA MẬT KHẨU */
+/* 🔐 NHẬP MẬT KHẨU */
 /* ================================= */
 
 function enterNumber(number) {
     if (enteredPassword.length >= 6) return;
+
     enteredPassword += number;
     updatePasswordDots();
 
@@ -42,6 +49,7 @@ function deleteNumber() {
 
 function updatePasswordDots() {
     const dots = document.querySelectorAll(".password-dots span");
+
     dots.forEach((dot, index) => {
         dot.classList.toggle("active", index < enteredPassword.length);
     });
@@ -56,6 +64,7 @@ function checkPassword() {
         setTimeout(() => {
             document.getElementById("passwordScreen").classList.add("hidden");
             document.getElementById("envelopeScreen").classList.remove("hidden");
+
             startFloatingHearts();
         }, 700);
     } else {
@@ -83,21 +92,27 @@ function checkPassword() {
 
 function openEnvelope() {
     if (envelopeOpened) return;
+
     envelopeOpened = true;
 
     const envelope = document.getElementById("envelope");
     const music = document.getElementById("bgMusic");
 
-    music.volume = 0.5;
-    music.play().catch(() => {});
+    if (music) {
+        music.volume = 0.5;
+        music.play().catch(() => {});
+    }
 
     envelope.classList.add("open");
 
     setTimeout(() => {
         document.getElementById("envelopeScreen").classList.add("hidden");
         document.getElementById("letterScreen").classList.remove("hidden");
+
         currentPageIndex = 0;
-        pageChanging = false;
+        hasReadOnce = false;
+        isChangingPage = false;
+
         showPage();
     }, 1200);
 }
@@ -115,10 +130,9 @@ function showPage() {
     typingSession++;
     const session = typingSession;
 
-    isTyping = !hasReadOnce;
-
     document.getElementById("currentPage").textContent = currentPageIndex + 1;
     document.getElementById("totalPages").textContent = pages.length;
+
     document.getElementById("pageTitle").textContent = "";
     document.getElementById("typedText").textContent = "";
 
@@ -126,21 +140,25 @@ function showPage() {
 
     const isLastPage = currentPageIndex === pages.length - 1;
 
-    document.getElementById("pageHint").textContent =
-        isLastPage ? "Đọc xong rồi hãy bấm nhé ❤️" : "Bấm → để đọc tiếp";
+    document.getElementById("pageHint").textContent = isLastPage ?
+        "Đọc xong rồi hãy bấm nhé ❤️" :
+        "Bấm → để đọc tiếp";
 
     if (hasReadOnce) {
         document.getElementById("pageTitle").textContent = page.title;
         document.getElementById("typedText").textContent = page.text;
+
         isTyping = false;
         return;
     }
+
+    isTyping = true;
 
     typeTitle(page.title, 0, session);
 }
 
 /* ================================= */
-/* ⌨️ HIỆU ỨNG GÕ CHỮ */
+/* ⌨️ GÕ TIÊU ĐỀ */
 /* ================================= */
 
 function typeTitle(text, index, session) {
@@ -158,6 +176,10 @@ function typeTitle(text, index, session) {
     }, 45);
 }
 
+/* ================================= */
+/* ⌨️ GÕ NỘI DUNG */
+/* ================================= */
+
 function typeText(text, index, session) {
     if (session !== typingSession) return;
 
@@ -174,7 +196,7 @@ function typeText(text, index, session) {
 }
 
 /* ================================= */
-/* 📖 CHUYỂN TRANG */
+/* 📖 TRANG TIẾP */
 /* ================================= */
 
 function nextPage() {
@@ -200,6 +222,10 @@ function nextPage() {
     }, 150);
 }
 
+/* ================================= */
+/* 📖 TRANG TRƯỚC */
+/* ================================= */
+
 function previousPage() {
     if (isChangingPage) return;
     if (currentPageIndex <= 0) return;
@@ -216,6 +242,7 @@ function previousPage() {
         isChangingPage = false;
     }, 150);
 }
+
 /* ================================= */
 /* 💌 ĐÓNG LÁ THƯ */
 /* ================================= */
@@ -223,18 +250,24 @@ function previousPage() {
 function closeLetter() {
     document.getElementById("letterScreen").classList.add("hidden");
     document.getElementById("finalScreen").classList.remove("hidden");
+
     createFinalHearts();
 }
 
+/* ================================= */
+/* 💌 ĐỌC LẠI THƯ */
+/* ================================= */
+
 function readLetterAgain() {
-    clearTimeout(typingTimer);
     clearTimeout(titleTypingTimer);
     clearTimeout(textTypingTimer);
 
     typingSession++;
     isTyping = false;
-    pageChanging = false;
+    isChangingPage = false;
+
     currentPageIndex = 0;
+    hasReadOnce = true;
 
     document.getElementById("finalScreen").classList.add("hidden");
     document.getElementById("letterScreen").classList.remove("hidden");
@@ -243,7 +276,7 @@ function readLetterAgain() {
 }
 
 /* ================================= */
-/* ❤️ HIỆU ỨNG TIM BAY */
+/* ❤️ TIM BAY */
 /* ================================= */
 
 function startFloatingHearts() {
@@ -258,15 +291,21 @@ function startFloatingHearts() {
 
 function createHeart() {
     const container = document.getElementById("floatingHearts");
+
     if (!container) return;
 
     const heart = document.createElement("div");
+
     heart.className = "floating-heart";
     heart.textContent = Math.random() > 0.5 ? "♡" : "♥";
+
     heart.style.left = Math.random() * 100 + "vw";
     heart.style.fontSize = 12 + Math.random() * 20 + "px";
     heart.style.animationDuration = 5 + Math.random() * 5 + "s";
-    heart.style.color = Math.random() > 0.5 ? "#ef6aa6" : "#ffffff";
+
+    heart.style.color = Math.random() > 0.5 ?
+        "#ef6aa6" :
+        "#ffffff";
 
     container.appendChild(heart);
 
@@ -300,14 +339,4 @@ function toggleMusic() {
         music.pause();
         button.textContent = "🔇";
     }
-}
-
-function readLetterAgain() {
-    document.getElementById("finalScreen").classList.add("hidden");
-    document.getElementById("letterScreen").classList.remove("hidden");
-
-    currentPageIndex = 0;
-    hasReadOnce = true;
-
-    showPage();
 }
