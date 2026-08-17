@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For You ❤️</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ================================= -->
+    <!-- 🎵 NHẠC NỀN -->
+    <!-- ================================= -->
+
+    <audio id="bgMusic" loop>
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
+    <button id="musicButton" onclick="toggleMusic()">🔊</button>
+
+    <!-- ================================= -->
+    <!-- LỚP TRÁI TIM BAY -->
+    <!-- ================================= -->
+
+    <div id="floatingHearts"></div>
+
+    <!-- ================================= -->
+    <!-- MÀN HÌNH MẬT KHẨU -->
+    <!-- ================================= -->
+
+    <section id="passwordScreen" class="screen">
+        <div class="password-box">
+            <div class="lock-heart">♡</div>
+            <h2>Nhập mật khẩu</h2>
+            <div id="dots" class="password-dots">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <p id="passwordMessage"></p>
+            <div class="keypad">
+                <button onclick="enterNumber('1')">1</button>
+                <button onclick="enterNumber('2')">2</button>
+                <button onclick="enterNumber('3')">3</button>
+                <button onclick="enterNumber('4')">4</button>
+                <button onclick="enterNumber('5')">5</button>
+                <button onclick="enterNumber('6')">6</button>
+                <button onclick="enterNumber('7')">7</button>
+                <button onclick="enterNumber('8')">8</button>
+                <button onclick="enterNumber('9')">9</button>
+                <div></div>
+                <button onclick="enterNumber('0')">0</button>
+                <button onclick="deleteNumber()">⌫</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================= -->
+    <!-- MÀN HÌNH PHONG THƯ -->
+    <!-- ================================= -->
+
+    <section id="envelopeScreen" class="screen hidden">
+        <div class="envelope-container">
+            <div id="envelope" class="envelope" onclick="openEnvelope()">
+                <div class="envelope-back"></div>
+                <div class="letter-paper"></div>
+                <div class="envelope-flap"></div>
+                <div class="envelope-front"></div>
+                <div class="seal">♥</div>
+            </div>
+            <p class="hint">Chạm vào phong thư để mở 💗</p>
+        </div>
+    </section>
+
+    <!-- ================================= -->
+    <!-- MÀN HÌNH ĐỌC THƯ -->
+    <!-- ================================= -->
+
+    <section id="letterScreen" class="screen hidden">
+        <div class="letter-container">
+            <div class="paper">
+                <div class="paper-decoration">♡</div>
+                <div class="page-number">
+                    <span id="currentPage">1</span> / <span id="totalPages"></span>
+                </div>
+                <h2 id="pageTitle"></h2>
+                <div id="typedText"></div>
+            </div>
+            <div class="letter-controls">
+                <button id="prevButton" onclick="previousPage()">←</button>
+                <button id="nextButton" onclick="nextPage()">→</button>
+            </div>
+            <p id="pageHint">Đọc từ từ nhé...</p>
+        </div>
+    </section>
+
+    <!-- ================================= -->
+    <!-- MÀN HÌNH CUỐI -->
+    <!-- ================================= -->
+
+    <section id="finalScreen" class="screen hidden">
+        <div class="final-content">
+            <div class="final-heart">❤️</div>
+            <h1>I LOVE YOU</h1>
+            <p>Và tớ yêu cậu rất nhiều.</p>
+            <div class="date">07 • 08 • 2026</div>
+            <button class="read-again-button" onclick="readLetterAgain()">💌 Quay lại</button>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

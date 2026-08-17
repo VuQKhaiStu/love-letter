@@ -1,0 +1,777 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --pink-light: #f9dce9;
+    --pink: #ef6aa6;
+    --pink-dark: #dc4f91;
+    --pink-soft: #f5b9d2;
+    --paper: #fffdf8;
+    --text: #513542;
+    --title: #67364d;
+    --hint: #6f294c;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: radial-gradient(circle at top, #fff1f7, var(--pink-light));
+    color: var(--text);
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+button {
+    font-family: inherit;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.screen {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.hidden {
+    display: none !important;
+}
+
+
+/* =============================== */
+
+
+/* 💕 TRÁI TIM BAY */
+
+
+/* =============================== */
+
+#floatingHearts {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 20;
+}
+
+.floating-heart {
+    position: absolute;
+    bottom: -30px;
+    font-size: 18px;
+    opacity: 0;
+    animation: floatHeart linear forwards;
+    pointer-events: none;
+}
+
+@keyframes floatHeart {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.7;
+    }
+    50% {
+        transform: translateY(-50vh) rotate(180deg);
+    }
+    90% {
+        opacity: 0.7;
+    }
+    100% {
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+
+/* =============================== */
+
+
+/* 🔐 MẬT KHẨU */
+
+
+/* =============================== */
+
+.password-box {
+    width: min(90%, 380px);
+    padding: 35px 25px;
+    text-align: center;
+    background: linear-gradient(145deg, #e85c9b, #ed72aa);
+    border-radius: 25px;
+    box-shadow: 0 20px 50px rgba(150, 70, 110, 0.25);
+    color: white;
+}
+
+.lock-heart {
+    width: 48px;
+    height: 48px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    font-size: 29px;
+}
+
+.password-box h2 {
+    margin-top: 15px;
+    font-size: 21px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
+
+.password-box.shake {
+    animation: shake 0.4s ease;
+}
+
+@keyframes shake {
+    0% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-8px);
+    }
+    50% {
+        transform: translateX(8px);
+    }
+    75% {
+        transform: translateX(-5px);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+
+/* =============================== */
+
+
+/* 🔘 DẤU MẬT KHẨU */
+
+
+/* =============================== */
+
+.password-dots {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    margin: 16px 0 20px;
+}
+
+.password-dots span {
+    width: 11px;
+    height: 11px;
+    border: 1.5px solid white;
+    border-radius: 50%;
+    transition: 0.2s ease;
+}
+
+.password-dots span.active {
+    background: white;
+    transform: scale(1.1);
+}
+
+
+/* =============================== */
+
+
+/* ❗ THÔNG BÁO MẬT KHẨU */
+
+
+/* =============================== */
+
+#passwordMessage {
+    min-height: 30px;
+    margin-bottom: 12px;
+    font-size: 17px;
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: 0.3px;
+    text-shadow: 0 2px 4px rgba(100, 30, 70, 0.3);
+}
+
+
+/* =============================== */
+
+
+/* 🔢 BÀN PHÍM */
+
+
+/* =============================== */
+
+.keypad {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.keypad button {
+    width: 58px;
+    height: 58px;
+    margin: auto;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.75);
+    background: transparent;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    transition: transform 0.15s ease, background 0.15s ease;
+    outline: none;
+}
+
+.keypad button:hover {
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.keypad button:active {
+    transform: scale(0.85);
+    background: rgba(255, 255, 255, 0.22);
+}
+
+
+/* =============================== */
+
+
+/* 💌 PHONG THƯ */
+
+
+/* =============================== */
+
+.envelope-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.envelope {
+    position: relative;
+    width: min(80vw, 420px);
+    aspect-ratio: 1.55;
+    cursor: pointer;
+    filter: drop-shadow(0 15px 20px rgba(150, 70, 110, 0.2));
+    transition: transform 0.4s ease;
+}
+
+.envelope:hover {
+    transform: scale(1.03);
+}
+
+.envelope:active {
+    transform: scale(0.98);
+}
+
+.envelope-back {
+    position: absolute;
+    inset: 0;
+    background: #ed65a2;
+    border-radius: 5px;
+}
+
+.letter-paper {
+    position: absolute;
+    left: 8%;
+    right: 8%;
+    bottom: 0;
+    height: 90%;
+    background: #fffdf8;
+    transition: transform 1s ease;
+    z-index: 2;
+}
+
+.envelope-front {
+    position: absolute;
+    inset: 0;
+    background: #e95c9c;
+    clip-path: polygon(0 0, 50% 58%, 100% 0, 100% 100%, 0 100%);
+    z-index: 4;
+}
+
+.envelope-flap {
+    position: absolute;
+    inset: 0;
+    background: #f17ab0;
+    clip-path: polygon(0 0, 100% 0, 50% 60%);
+    transform-origin: top;
+    transition: transform 1s ease;
+    z-index: 5;
+}
+
+.seal {
+    position: absolute;
+    left: 50%;
+    top: 55%;
+    transform: translate(-50%, -50%);
+    width: 48px;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background: #ee71ac;
+    color: white;
+    font-size: 20px;
+    box-shadow: 0 5px 15px rgba(150, 50, 100, 0.2);
+    z-index: 6;
+}
+
+.hint {
+    margin-top: 22px;
+    color: var(--hint);
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    text-shadow: 0 2px 5px rgba(255, 255, 255, 0.7);
+    animation: hintPulse 2s ease-in-out infinite;
+}
+
+
+/* =============================== */
+
+
+/* 💌 PHONG THƯ MỞ */
+
+
+/* =============================== */
+
+.envelope.open .envelope-flap {
+    transform: rotateX(180deg);
+}
+
+.envelope.open .letter-paper {
+    transform: translateY(-70%);
+}
+
+
+/* =============================== */
+
+
+/* 📜 TRANG GIẤY */
+
+
+/* =============================== */
+
+.letter-container {
+    width: min(88vw, 820px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.paper {
+    position: relative;
+    width: 100%;
+    min-height: 520px;
+    padding: 70px 75px 65px;
+    background: var(--paper);
+    box-shadow: 0 20px 50px rgba(80, 35, 60, 0.22);
+    transform: rotate(-0.5deg);
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.paper::before {
+    content: "";
+    position: absolute;
+    inset: 12px;
+    border: 1px solid rgba(180, 140, 155, 0.18);
+    pointer-events: none;
+}
+
+
+/* =============================== */
+
+
+/* 💗 TRANG TRÍ */
+
+
+/* =============================== */
+
+.paper-decoration {
+    position: absolute;
+    left: 25px;
+    bottom: 20px;
+    font-size: 25px;
+    color: #e78bb2;
+}
+
+.page-number {
+    position: absolute;
+    right: 25px;
+    bottom: 20px;
+    font-size: 13px;
+    color: #a97d91;
+    font-weight: 500;
+}
+
+
+/* =============================== */
+
+
+/* ✍️ TIÊU ĐỀ THƯ */
+
+
+/* =============================== */
+
+.paper h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    color: var(--title);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 30px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    line-height: 1.4;
+}
+
+
+/* =============================== */
+
+
+/* ✍️ NỘI DUNG GÕ CHỮ */
+
+
+/* =============================== */
+
+#typedText {
+    min-height: 280px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 21px;
+    line-height: 2.05;
+    color: #513542;
+    white-space: pre-line;
+    letter-spacing: 0.2px;
+    text-align: left;
+    font-weight: 500;
+}
+
+
+/* =============================== */
+
+
+/* ◀️ ▶️ NÚT CHUYỂN TRANG */
+
+
+/* =============================== */
+
+.letter-controls {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.letter-controls button {
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 50%;
+    background: #e96aa4;
+    color: white;
+    font-size: 22px;
+    cursor: pointer;
+    transition: transform 0.3s ease, background 0.3s ease;
+    outline: none;
+}
+
+.letter-controls button:hover {
+    transform: scale(1.1);
+    background: #dc4f91;
+}
+
+.letter-controls button:active {
+    transform: scale(0.92);
+}
+
+.letter-controls button:disabled {
+    opacity: 0.3;
+    cursor: default;
+}
+
+.letter-controls button:disabled:hover {
+    transform: none;
+}
+
+
+/* =============================== */
+
+
+/* 💬 HƯỚNG DẪN */
+
+
+/* =============================== */
+
+#pageHint {
+    margin-top: 14px;
+    color: var(--hint);
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    text-shadow: 0 2px 5px rgba(255, 255, 255, 0.7);
+    animation: hintPulse 2s ease-in-out infinite;
+}
+
+@keyframes hintPulse {
+    0%,
+    100% {
+        opacity: 0.78;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+
+/* =============================== */
+
+
+/* ❤️ TRANG CUỐI */
+
+
+/* =============================== */
+
+#finalScreen {
+    background: radial-gradient(circle, #ffe5f1, #e88ab5);
+}
+
+.final-content {
+    text-align: center;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.final-heart {
+    font-size: clamp(120px, 25vw, 220px);
+    animation: finalHeartbeat 1.2s infinite;
+    filter: drop-shadow(0 10px 20px rgba(170, 50, 100, 0.25));
+}
+
+.final-content h1 {
+    margin-top: 15px;
+    font-family: Georgia, serif;
+    font-size: clamp(40px, 10vw, 80px);
+    color: #ffffff;
+    letter-spacing: 5px;
+    text-shadow: 0 4px 12px rgba(120, 40, 80, 0.18);
+}
+
+.final-content p {
+    margin-top: 15px;
+    color: #6f294c;
+    font-size: 21px;
+    font-weight: 600;
+    text-shadow: 0 2px 5px rgba(255, 255, 255, 0.65);
+}
+
+.date {
+    margin-top: 25px;
+    color: #6f294c;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-shadow: 0 2px 5px rgba(255, 255, 255, 0.65);
+}
+
+@keyframes finalHeartbeat {
+    0%,
+    100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.12);
+    }
+}
+
+
+/* =============================== */
+
+
+/* 💌 NÚT ĐỌC LẠI THƯ */
+
+
+/* =============================== */
+
+.read-again-button {
+    margin-top: 30px;
+    padding: 13px 28px;
+    border: none;
+    border-radius: 30px;
+    background: rgba(255, 255, 255, 0.9);
+    color: #7a234d;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(120, 40, 80, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    outline: none;
+}
+
+.read-again-button:hover {
+    transform: translateY(-3px) scale(1.03);
+    background: white;
+    box-shadow: 0 10px 25px rgba(120, 40, 80, 0.2);
+}
+
+.read-again-button:active {
+    transform: scale(0.95);
+}
+
+
+/* =============================== */
+
+
+/* 🎵 NÚT NHẠC */
+
+
+/* =============================== */
+
+#musicButton {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 45px;
+    height: 45px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.82);
+    color: #e95c9c;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 100;
+    box-shadow: 0 5px 15px rgba(150, 70, 110, 0.15);
+    transition: transform 0.3s ease, background 0.3s ease;
+    outline: none;
+}
+
+#musicButton:hover {
+    transform: scale(1.1);
+    background: white;
+}
+
+#musicButton:active {
+    transform: scale(0.92);
+}
+
+
+/* =============================== */
+
+
+/* 📱 MOBILE */
+
+
+/* =============================== */
+
+@media (max-width: 600px) {
+    .password-box {
+        width: 88%;
+        padding: 30px 22px;
+    }
+    .password-box h2 {
+        font-size: 20px;
+    }
+    .keypad button {
+        width: 55px;
+        height: 55px;
+        font-size: 19px;
+    }
+    .envelope {
+        width: 82vw;
+    }
+    .hint,
+    #pageHint {
+        font-size: 16px;
+    }
+    .letter-container {
+        width: 92vw;
+    }
+    .paper {
+        min-height: 450px;
+        padding: 45px 28px 45px;
+    }
+    .paper h2 {
+        font-size: 22px;
+        margin-bottom: 28px;
+        line-height: 1.4;
+    }
+    #typedText {
+        min-height: 260px;
+        font-size: 17px;
+        line-height: 1.85;
+    }
+    .letter-controls {
+        gap: 15px;
+    }
+    .letter-controls button {
+        width: 46px;
+        height: 46px;
+        font-size: 20px;
+    }
+    .final-content h1 {
+        letter-spacing: 3px;
+    }
+    .final-content p {
+        font-size: 18px;
+    }
+    .date {
+        font-size: 13px;
+        letter-spacing: 3px;
+    }
+    .read-again-button {
+        margin-top: 25px;
+        padding: 12px 24px;
+        font-size: 15px;
+    }
+    #musicButton {
+        top: 15px;
+        right: 15px;
+        width: 42px;
+        height: 42px;
+        font-size: 18px;
+    }
+}
+
+
+/* =============================== */
+
+
+/* 📱 MÀN HÌNH RẤT NHỎ */
+
+
+/* =============================== */
+
+@media (max-width: 380px) {
+    .password-box {
+        padding: 25px 18px;
+    }
+    .keypad {
+        gap: 7px;
+    }
+    .keypad button {
+        width: 50px;
+        height: 50px;
+    }
+    .paper {
+        min-height: 420px;
+        padding: 38px 22px 40px;
+    }
+    .paper h2 {
+        font-size: 20px;
+    }
+    #typedText {
+        font-size: 16px;
+        line-height: 1.75;
+    }
+}
+
+s
